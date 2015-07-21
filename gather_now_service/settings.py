@@ -21,6 +21,11 @@ RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
 # (defaults to read-only item access).
 ITEM_METHODS = ['GET', 'PATCH', 'DELETE']
 
+
+# TMP
+PUBLIC_METHODS = ['GET']
+PUBLIC_ITEM_METHODS = ['GET', 'PATCH']
+
 # We enable standard client cache directives for all resources exposed by the
 # API. We can always override these global settings later.
 CACHE_CONTROL = 'max-age=20'
@@ -39,6 +44,7 @@ PAGINATION_LIMIT=2000
 # be accessible to the API consumer.
 
 events = {
+  'public_item_methods': ['GET', 'PATCH', 'PUT', 'DELETE'],
   'resource_methods': ['GET', 'POST'],
   'item_methods': ['GET', 'PATCH', 'PUT', 'DELETE'],
   'schema': {
