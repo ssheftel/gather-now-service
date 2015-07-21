@@ -141,6 +141,11 @@ events = {
       'type': 'point',
       'nullable': True
     },
+    #TMP
+    'unequ_event_info_string': {
+      'type': 'string'
+    },
+    #end TMP
     'source': {
       'type': 'string',
       'required': True,
