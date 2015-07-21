@@ -39,6 +39,8 @@ PAGINATION_LIMIT=2000
 # be accessible to the API consumer.
 
 events = {
+  'resource_methods': ['GET', 'POST'],
+  'item_methods': ['GET', 'PATCH', 'PUT', 'DELETE'],
   'schema': {
     'url': {
       'type': 'string',
