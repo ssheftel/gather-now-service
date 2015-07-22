@@ -1,16 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-""""""
+"""Eve Configuration"""
 import os
+
+from gather_now_service.auth import ScraperAuth
 
 MONGO_HOST = os.environ.get('MONGO_HOST')
 MONGO_PORT = os.environ.get('MONGO_PORT')
 MONGO_USERNAME = os.environ.get('MONGO_USERNAME')
 MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD')
 MONGO_DBNAME = os.environ.get('MONGO_DBNAME')
+#MONGO_REPLICA_SET = os.environ.get('MONGO_REPLICA_SET')
 
-XML=False
-DATE_FORMAT='%Y-%m-%dT%H:%M:%S.%fZ'
+# Change date format to match json default format
+DATE_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
 
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
 # (if you omit this line, the API will default to ['GET'] and provide
@@ -22,31 +25,34 @@ RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
 ITEM_METHODS = ['GET', 'PATCH', 'DELETE']
 
 
-# TMP
+# Public enabled collections methods
 PUBLIC_METHODS = ['GET']
-PUBLIC_ITEM_METHODS = ['GET', 'PATCH']
+
+# Public enabled item methods
+PUBLIC_ITEM_METHODS = ['GET']
 
 # We enable standard client cache directives for all resources exposed by the
-# API. We can always override these global settings later.
-CACHE_CONTROL = 'max-age=20'
+# API, to 20 sec. We can always override these global settings later.
+CACHE_CONTROL = 'max-age=00'
 CACHE_EXPIRES = 20
 
-PAGINATION_LIMIT=2000
+# Max numper of records per page
+PAGINATION_LIMIT = 2000
 
-# Our API will expose two resources (MongoDB collections): 'people' and
-# 'works'. In order to allow for proper data validation, we define beaviour
+# Disable XML - cause it sucks
+XML = False
+
+# Url Prefix
+#URL_PREFIX = 'api'
+
+# Our API will expose one resources (MongoDB collections): 'events'
+# In order to allow for proper data validation, we define beaviour 
 # and structure.
 
-
-
-
-# The DOMAIN dict explains which resources will be available and how they will
-# be accessible to the API consumer.
-
 events = {
-  'public_item_methods': ['GET', 'PATCH', 'PUT', 'DELETE'],
-  'resource_methods': ['GET', 'POST'],
-  'item_methods': ['GET', 'PATCH', 'PUT', 'DELETE'],
+  'authentication': ScraperAuth,
+  'public_methods': ['GET'],
+  'public_item_methods': ['GET'],
   'schema': {
     'url': {
       'type': 'string',
@@ -149,19 +155,21 @@ events = {
       'type': 'point',
       'nullable': True
     },
-    #TMP
+    # TODO: Remove field from mongo and scraper
     'unequ_event_info_string': {
       'type': 'string'
     },
-    #end TMP
     'source': {
       'type': 'string',
-      'required': True,
+      'required': True
     }
-
   }
 }
 
+
+
+# The DOMAIN dict explains which resources will be available and how they will
+# be accessible to the API consumer.
 
 DOMAIN = {
   'events': events
