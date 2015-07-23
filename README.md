@@ -2,6 +2,7 @@
 
 #Deploying
 - run locally: `honcho start`
+- restart: `heroku restart`
 - `git push heroku master`
 
 

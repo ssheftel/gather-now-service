@@ -42,6 +42,9 @@ PAGINATION_LIMIT = 2000
 # Disable XML - cause it sucks
 XML = False
 
+# Enable Cross-Origin request from all domains - TMP
+X_DOMAINS = '*'
+
 # Url Prefix
 #URL_PREFIX = 'api'
 
